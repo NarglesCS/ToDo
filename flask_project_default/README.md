@@ -2,6 +2,7 @@
 
 * Flask
 * Flask-SQLAlchemy
+* WTForms
 
 ## Install
 
