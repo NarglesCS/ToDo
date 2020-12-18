@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+  {% block content %}
+    <div class="column is-8 is-offset-2">
+      <div class="box">
+      {% if todo is defined %}
+        <h1>Things to do:</h1><br><br>
+          {% for thing in todo %}
+            {% if not thing.complete %}
+              <div class="field has-addons" style="justify-content: left;">
+                <form action="{{ url_for('up', id= thing.id ) }}" method='post'>
+                  <button type="submit" class="button is-primary is-small" name="up">+</button>
+                </form>
+                <form action="{{ url_for('down', id= thing.id ) }}" method='post'>
+                  <button type="submit" class="button is-primary is-small" style="padding-left: 10px;" name="down">-</button>
+                </form>
+                <div class="field">
+                  <label style="padding-left: 40px; padding-right: 40px;">{{thing.task}} complete this by {{ date[loop.index0] }}</label>
+                </div>
+                <form action="{{ url_for('delete', id= thing.id ) }}" method='post'>
+                  <button type="submit" class="button is-primary is-small" name="delete">Delete</button>
+                </form>
+                <form action="{{ url_for('complete', id= thing.id ) }}" method='post'>
+                  <button type="submit" class="button is-primary is-small" style="padding-left: 10px;" name="complete">Completed</button>
+                </form>
+              </div>
+            <br>
+            {% endif %}
+            <!-- {% if thing.complete %}
+            <form action="{{ url_for('delete', id= thing.id ) }}" method='post'>
+              <label for="{{thing.position}}"> Congratulations! {{thing.task}} has been completed.</label>
+              <button class="button is-primary is-small" type="submit" name="delete">Delete</button>
+            </form>
+            <br>
+            {% endif %} -->
+          {% endfor %}
+      {% endif %}
+      <br><br><br>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="notification is-danger">
+            {{ messages[0] }}
+          </div>
+        {% endif %}
+      {% endwith %}
+      <form action="{{ url_for('ToDo') }}" method="post">
+        <div class="field">
+          <label for="task">What needs to be done? </label>
+          {{form.task(class="input", style="width: 33%;", placeholder="What needs to be done?")}}
+
+        </div>
+        <div class="field">
+          <label for="due">What is the due date? </label>
+          {{form.due_date(class="input", style="width: 33%;", type="date", placeholder="What is the due date? ")}}
+
+        </div>
+        <button class="button is-primary" type="submit">Add task</button>
+      </form>
+      </div>
+    </div>
+  {% endblock %}

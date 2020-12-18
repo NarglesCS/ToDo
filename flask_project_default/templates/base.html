@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Two Fish's todo list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+</head>
+
+<body>
+    <section class="hero is-primary is-fullheight">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                          {% if userID is defined %}
+                            <a href="{{ url_for('logout') }}" class="navbar-item">
+                                Logout
+                            </a>
+                          {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+               {% block content %}
+               {% endblock %}
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

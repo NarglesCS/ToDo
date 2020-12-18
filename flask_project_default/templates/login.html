@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+  <h3 class="title">Login</h3>
+  <div class="box">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="notification is-danger">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <form method="POST" action="/login">
+      <div class="field">
+        {{form.username(class="input is-large", placeholder="Username")}}
+      </div>
+      <div class="field">
+        {{form.password(class="input is-large", type="password", placeholder="Password")}}
+      </div>
+      <div class="field">
+          <a href="{{url_for('signup')}}" class="has-text-link">Create an account</a>
+      </div>
+      <button class="button is-block is-info is-large is-fullwidth">Login</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
